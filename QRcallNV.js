@@ -1,8 +1,5 @@
 (() => {
     'use strict'; // 厳格モードを使用して、より厳密なエラーチェックを行う
-    let flag = false;
-    formBridge.events.on('form.show', async function (context) {
-        if (flag === true) {
         async function QRCode() {
             const qrData = await QRactive('qr'); //QR実行関数にラベル要素のフィールドコード「qr」として渡して実行
             alert(qrData)
@@ -20,9 +17,5 @@
             }
             requestAnimationFrame(QRCode); // QRコード読み取り後に再度関数を呼び出す
         };
-        requestAnimationFrame(QRCode); // 初回の関数を呼び出し
-    }else{
-        flag = true;
-    };
-    });
+    requestAnimationFrame(QRCode); // 初回の関数を呼び出し
 })();
