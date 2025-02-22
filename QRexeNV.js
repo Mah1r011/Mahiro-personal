@@ -1,4 +1,5 @@
 function QRactive(spID) { //ラベル要素のフィールドコードの受け取り
+    alert("3")
     return new Promise((resolve) => { //非同期処理
     let cancelLoop = false; // ループキャンセルフラグ
     // 【1】カメラの設定（背面カメラを使用）
@@ -30,7 +31,7 @@ function QRactive(spID) { //ラベル要素のフィールドコードの受け�
     Cbtn.style.width = '150px'; // ボタンの幅を設定
     Cbtn.style.height = '150px'; // ボタンの高さを設定
     Cbtn.style.backgroundColor = 'green';
-
+    alert("4")
     sp.appendChild(btn); // ラベル要素にボタンを追加
 
     // 【3】ボタンを押された後の処理
