@@ -13,6 +13,9 @@ function QRactive(spID) { //ラベル要素のフィールドコードの受け�
     };
     // 【2】HTML要素の作成（ビデオとキャンバスとボタン）
     const sp = document.querySelector('[data-field-code="'+spID+'"]'); //ラベル要素の取得
+    if (!sp) {
+        alert('ラベル要素が見つかりません');
+    }
     //ビデオとキャンバスの作成
     const video = document.createElement('video'); // カメラ映像を表示するビデオ要素を作成
     const canvas = document.createElement('canvas'); // QRコードを読み取るためのキャンバス要素を作成
