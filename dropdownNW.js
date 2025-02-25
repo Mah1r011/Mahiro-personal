@@ -49,4 +49,10 @@
         const NAMETEXT = NAMElist.join(',');
         context.setFieldValue('名前2',NAMETEXT)
     });
+
+    formBridge.events.on('form.field.change.名前1', function (context) {
+        const NAMEone = context.value;
+        console.log(NAMEone);
+        context.setFieldValue('ルックアップ',NAMEone)
+    });
 })();
