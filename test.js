@@ -1,48 +1,12 @@
 (() => {
     'use strict';
-
-    // QRコードリーダーの初期化と設定
-    const video = document.createElement('video');
-    const canvasElement = document.createElement('canvas');
-    const canvas = canvasElement.getContext('2d');
-    
-    // QRコードリーダーの要素をラベルフィールドに追加
-    formBridge.events.on('form.load', () => {
-        const qrLabel = document.querySelector('[data-field-name="qr"]');
-        if (qrLabel) {
-            qrLabel.appendChild(video);
-            qrLabel.appendChild(canvasElement);
-            
-            // カメラの起動
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    video.setAttribute("playsinline", true);
-                    video.play();
-                    requestAnimationFrame(tick);
-                })
-                .catch(function(err) {
-                    console.error("カメラの起動に失敗しました: ", err);
-                });
-        }
+    formBridge.events.on('form.show', function () {
+    const sp = document.querySelector('[data-field-code="qr"]');
+    const btn = document.createElement('button'); // ボタン要素を作成
+    btn.textContent = 'QRコード読取'; // ボタンのテキストを設定
+    btn.style.width = '150px'; // ボタンの幅を設定
+    btn.style.height = '150px'; // ボタンの高さを設定
+    btn.style.backgroundColor = 'green';
+    sp.appendChild(btn); // ラベル要素にボタンを追加
     });
-
-    function tick() {
-        if (video.readyState === video.HAVE_ENOUGH_DATA) {
-            canvasElement.height = video.videoHeight;
-            canvasElement.width = video.videoWidth;
-            canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-            
-            const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
-            const code = jsQR(imageData.data, imageData.width, imageData.height, {
-                inversionAttempts: "dontInvert",
-            });
-            
-            if (code) {
-                console.log("QRコードを検出: " + code.data);
-                // ここでQRコードの値を使用して必要な処理を実行
-            }
-        }
-        requestAnimationFrame(tick);
-    }
 })();
